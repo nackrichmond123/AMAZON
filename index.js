@@ -47,7 +47,7 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-button" data-attribute-name = "${product.name}">
+          <button class="add-to-cart-button button-primary js-button" data-product-name = "${product.name}" id="${product.id}">
             Add to Cart
           </button>
         </div>
@@ -55,26 +55,69 @@ products.forEach((product) => {
     `;
 
     // We're using the Accumulator pattern to add all the elements generated together.
+    // console.log(generatedHTML);
     accumulativePattern += generatedHTML;
-
-    // console.log(accumulativePattern);
     
 });
 
-
-// Target the products container and put all the product details in.
-// setTimeout(() =>{
+// Target the products container and put all the product details in and display it on the Page.
     document.querySelector('.products-grid').innerHTML = accumulativePattern;
-// },1000);
+    
 
+// This countDown  variable will count the number of of products added to the Cart.Same product will be counted as one.  
+let countDown = 0;
 
-// Identify the Add to Cart button by giving it a class name and loop through to take effect on all the buttons
+// Identify the Add to Cart button by giving it a class name and loop through to take effect on all the buttons.
+// We are solving all the Add to Cart functionalities here...
 document.querySelectorAll('.js-button').forEach((addButton) => {
-    // console.log(addBtn);
-    
+
+  // Here,we're giving the Add to cart button an Even Listener.
     addButton.addEventListener('click',() => {
-        console.log('clicked a button ');
-    });
+      // Here a Data Atrribute has been given to all the products.It's called data-product-name.
+      let productName = addButton.dataset.productName;
+
+      // console.log(productName);
     
+      // A  condition to check whether a product has already been added to cart or not,Using the products's ID.
+      let sameProduct = '';
+      cart.forEach((item) =>{
+        // console.log(item.quantity);
+        
+        if (productName === item.Name) {
+          sameProduct = item;
+        }
+      });
+
+      // If there's a same product added,quantity will increase else product will be added to cart.
+      if (sameProduct) {
+        sameProduct.quantity += 1;
+
+      } else {
+          cart.push({
+          Name:productName,
+          quantity: 1
+        });
+
+        // The countDown increment.
+        countDown  +=1;
+      }
+
+      // Demostration of number of cart on the page.
+      let productCount = document.querySelector('.cart-quantity');
+      productCount.innerHTML = countDown;
+      // console.log(countDown);
+    
+      console.log(cart);
+
+
+    }); 
+
 });
 
+
+      // After adding a product,a message will show at the bottom that the product has been added sucessfully.
+      // document.querySelectorAll('.added-to-cart').forEach((addedMessage) => {
+      //   console.log(addedMessage.innerHTML);
+        
+      // });
+      // messagePopup.innerHTML = 'added';
