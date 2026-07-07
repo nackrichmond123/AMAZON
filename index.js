@@ -76,6 +76,10 @@ document.querySelectorAll('.js-button').forEach((addButton) => {
       // Here a Data Atrribute has been given to all the products.It's called data-product-name.
       let productName = addButton.dataset.productName;
 
+      let idName = addButton.id;
+      console.log(idName);
+       
+
       // console.log(productName);
     
       // A  condition to check whether a product has already been added to cart or not,Using the products's ID.
@@ -109,6 +113,7 @@ document.querySelectorAll('.js-button').forEach((addButton) => {
     
       console.log(cart);
 
+      // document.querySelectorAll('.js-button').fo
 
     }); 
 
