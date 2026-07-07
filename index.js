@@ -64,12 +64,11 @@ products.forEach((product) => {
     document.querySelector('.products-grid').innerHTML = accumulativePattern;
     
 
-// This countDown  variable will count the number of of products added to the Cart.Same product will be counted as one.  
-let countDown = 0;
-
 // Identify the Add to Cart button by giving it a class name and loop through to take effect on all the buttons.
 // We are solving all the Add to Cart functionalities here...
 document.querySelectorAll('.js-button').forEach((addButton) => {
+  // console.log(addButton);
+  
 
   // Here,we're giving the Add to cart button an Even Listener.
     addButton.addEventListener('click',() => {
@@ -77,7 +76,7 @@ document.querySelectorAll('.js-button').forEach((addButton) => {
       let productName = addButton.dataset.productName;
 
       let idName = addButton.id;
-      console.log(idName);
+      // console.log(idName);
        
 
       // console.log(productName);
@@ -85,9 +84,9 @@ document.querySelectorAll('.js-button').forEach((addButton) => {
       // A  condition to check whether a product has already been added to cart or not,Using the products's ID.
       let sameProduct = '';
       cart.forEach((item) =>{
-        // console.log(item.quantity);
+        console.log(item);
         
-        if (productName === item.Name) {
+        if (idName === item.ID) {
           sameProduct = item;
         }
       });
@@ -99,17 +98,27 @@ document.querySelectorAll('.js-button').forEach((addButton) => {
       } else {
           cart.push({
           Name:productName,
-          quantity: 1
+          quantity: 1,
+          ID:idName
         });
-
-        // The countDown increment.
-        countDown  +=1;
+        
       }
+
+        // This countDown  variable will count the number of products added to the Cart..  
+        let quantityCount = 0;
+
+        cart.forEach((item) =>{
+          // The countDown increment.
+          quantityCount += item.quantity;
+          
+        })
+
+        console.log(quantityCount);
 
       // Demostration of number of cart on the page.
       let productCount = document.querySelector('.cart-quantity');
-      productCount.innerHTML = countDown;
-      // console.log(countDown);
+      productCount.innerHTML = quantityCount;
+      
     
       console.log(cart);
 
