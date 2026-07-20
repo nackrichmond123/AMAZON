@@ -1,3 +1,6 @@
+import { cart, addToCart} from "../data/Cart.js";
+import { products } from "../data/products.js";
+
 let accumulativePattern = '';
 
 // Here we're using all the products created as an Objects inside an Array,the Array name is products.Using the ForEach loop,we loop through and generate all the HTML elements needed and display it on the web page.
@@ -61,49 +64,10 @@ products.forEach((product) => {
 });
 
 // Target the products container and put all the product details in and display it on the Page.
-    document.querySelector('.products-grid').innerHTML = accumulativePattern;
-    
+document.querySelector('.products-grid').innerHTML = accumulativePattern;
 
-// Identify the Add to Cart button by giving it a class name and loop through to take effect on all the buttons.
-// We are solving all the Add to Cart functionalities here...
-document.querySelectorAll('.js-button').forEach((addButton) => {
-  // console.log(addButton);
-  
-
-  // Here,we're giving the Add to cart button an Even Listener.
-    addButton.addEventListener('click',() => {
-      // Here a Data Atrribute has been given to all the products.It's called data-product-name.
-      let productName = addButton.dataset.productName;
-
-      let idName = addButton.id;
-      // console.log(idName);
-       
-
-      // console.log(productName);
-    
-      // A  condition to check whether a product has already been added to cart or not,Using the products's ID.
-      let sameProduct = '';
-      cart.forEach((item) =>{
-        console.log(item);
-        
-        if (idName === item.ID) {
-          sameProduct = item;
-        }
-      });
-
-      // If there's a same product added,quantity will increase else product will be added to cart.
-      if (sameProduct) {
-        sameProduct.quantity += 1;
-
-      } else {
-          cart.push({
-          Name:productName,
-          quantity: 1,
-          ID:idName
-        });
-        
-      }
-
+// A function to update the cart quantity depending on the products added.
+function updateQuantity() {
         // This countDown  variable will count the number of products added to the Cart..  
         let quantityCount = 0;
 
@@ -113,25 +77,40 @@ document.querySelectorAll('.js-button').forEach((addButton) => {
           
         })
 
-        console.log(quantityCount);
+        // console.log(quantityCount);
 
       // Demostration of number of cart on the page.
       let productCount = document.querySelector('.cart-quantity');
       productCount.innerHTML = quantityCount;
-      
-    
-      console.log(cart);
+}
 
-      // document.querySelectorAll('.js-button').fo
+// Identify the Add to Cart button by giving it a class name and loop through to take effect on all the buttons.
+// We are solving all the Add to Cart functionalities here...
+document.querySelectorAll('.js-button').forEach((addButton) => {
+
+  // Here,we're giving the Add to cart button an Even Listener.
+    addButton.addEventListener('click',() => {
+      let productName = addButton.dataset.productName;
+      let idName = addButton.id;
+      addToCart(productName,idName);
+      updateQuantity();
+
+      console.log(cart);
 
     }); 
 
 });
 
+// const demo = {
+//   name:'Richmond',
+//   age:23,
+//   city:'Kumasi'
+// };
 
-      // After adding a product,a message will show at the bottom that the product has been added sucessfully.
-      // document.querySelectorAll('.added-to-cart').forEach((addedMessage) => {
-      //   console.log(addedMessage.innerHTML);
-        
-      // });
-      // messagePopup.innerHTML = 'added';
+// localStorage.setItem('person',JSON.stringify(demo));
+
+// const storeName =  localStorage.getItem('person');
+// console.log(storeName);
+
+// console.log(JSON.stringify(demo.city));
+
