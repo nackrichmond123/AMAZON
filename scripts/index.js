@@ -45,7 +45,7 @@ products.forEach((product) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart" "popup">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -84,33 +84,35 @@ function updateQuantity() {
       productCount.innerHTML = quantityCount;
 }
 
+
 // Identify the Add to Cart button by giving it a class name and loop through to take effect on all the buttons.
 // We are solving all the Add to Cart functionalities here...
 document.querySelectorAll('.js-button').forEach((addButton) => {
 
+  // console.log(addButton);
+  
   // Here,we're giving the Add to cart button an Even Listener.
     addButton.addEventListener('click',() => {
       let productName = addButton.dataset.productName;
       let idName = addButton.id;
+      
       addToCart(productName,idName);
       updateQuantity();
+
+      document.querySelectorAll('.popup').forEach((popUp) => {
+        popUp.addEventListener('click',(pop) =>{
+          console.log(pop);
+        })
+        
+        
+      });
+     
+      // popUp.style.display = 'flex';
+       
+
 
       console.log(cart);
 
     }); 
-
 });
-
-// const demo = {
-//   name:'Richmond',
-//   age:23,
-//   city:'Kumasi'
-// };
-
-// localStorage.setItem('person',JSON.stringify(demo));
-
-// const storeName =  localStorage.getItem('person');
-// console.log(storeName);
-
-// console.log(JSON.stringify(demo.city));
 
