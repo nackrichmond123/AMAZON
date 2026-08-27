@@ -15,6 +15,16 @@ export const cart = [
     Name: "Adults Plain Cotton T-Shirt - 2 Pack",
     quantity: 1,
     ID: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e"
+  },
+
+  {
+    ID: "3fdfe8d6-9a15-4979-b459-585b0d0545b9",
+    quantity: 1
+  },
+
+  {
+    ID: "8c9c52b5-5a19-4bcb-a5d1-158a74287c53",
+    quantity: 1
   }
 ];
 

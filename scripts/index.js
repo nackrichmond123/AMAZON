@@ -106,10 +106,6 @@ document.querySelectorAll('.js-button').forEach((addButton) => {
         
         
       });
-     
-      // popUp.style.display = 'flex';
-       
-
 
       console.log(cart);
 

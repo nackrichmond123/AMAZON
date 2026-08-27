@@ -8,13 +8,14 @@ let theAccumulator;
 
     cart.forEach((cartItem,index) =>{
 
+      // console.log(cartItem);
+      
       const cartId = cartItem.ID;
 
       products.forEach((allProducts) =>{
-          
+        
           if (allProducts.id === cartId) {
               matchingCartProduct = allProducts;
-              
           }
       });
 
@@ -56,7 +57,7 @@ let theAccumulator;
                   <div class="delivery-option">
                     <input type="radio" checked
                       class="delivery-option-input"
-                      name="delivery-option-1">
+                      name="delivery-option-${matchingCartProduct.id}">
                     <div>
                       <div class="delivery-option-date">
                         Tuesday, June 21
@@ -69,7 +70,7 @@ let theAccumulator;
                   <div class="delivery-option">
                     <input type="radio"
                       class="delivery-option-input"
-                      name="delivery-option-1">
+                      name="delivery-option-${matchingCartProduct.id}">
                     <div>
                       <div class="delivery-option-date">
                         Wednesday, June 15
@@ -82,7 +83,7 @@ let theAccumulator;
                   <div class="delivery-option">
                     <input type="radio"
                       class="delivery-option-input"
-                      name="delivery-option-1">
+                      name="delivery-option-${matchingCartProduct.id}">
                     <div>
                       <div class="delivery-option-date">
                         Monday, June 13
@@ -102,9 +103,8 @@ let theAccumulator;
       theAccumulator += HTML;
       
       // This part also shows the number of products added to the cart and display it on top of the CheckOut page.
-      // We use the index of the products in the cart to count it by adding them together.
-      index ++;
-      document.querySelector('.return-to-home-link').innerHTML = index +' ' + 'items';
+      // We use the ".length" property to count it..
+      document.querySelector('.return-to-home-link').innerHTML = cart.length +' ' + 'items';
 
     });
 
