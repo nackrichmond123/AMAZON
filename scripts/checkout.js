@@ -109,3 +109,6 @@ let theAccumulator;
     });
 
 document.querySelector('.order-summary').innerHTML = theAccumulator;
+
+
+console.log(5);
