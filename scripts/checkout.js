@@ -1,4 +1,4 @@
-import { cart } from "../data/Cart.js";
+import { cart,removingFromCart } from "../data/Cart.js";
 import { products } from "../data/products.js";
 
  // Here,we're using the product Id to get the other details of a product that is added into a cart.Eg is image,price and name.
@@ -21,7 +21,7 @@ let theAccumulator;
 
     // Using the same process we used for generating the HTML for all the products on the page,we use same for generating for all carts added to the cart page. 
       let HTML = `
-              <div class="cart-item-container">
+              <div class="cart-item-container idName-${matchingCartProduct.id}">
               <div class="delivery-date">
                 Delivery date: Tuesday, June 21
               </div>
@@ -44,7 +44,7 @@ let theAccumulator;
                     <span class="update-quantity-link link-primary">
                       Update
                     </span>
-                    <span class="delete-quantity-link link-primary">
+                    <span class="delete-quantity-link link-primary " id="${matchingCartProduct.id}">
                       Delete
                     </span>
                   </div>
@@ -99,6 +99,8 @@ let theAccumulator;
       
       `;
 
+      // console.log(HTML);
+      
       // The Accumulater variable.
       theAccumulator += HTML;
       
@@ -107,8 +109,42 @@ let theAccumulator;
       document.querySelector('.return-to-home-link').innerHTML = cart.length +' ' + 'items';
 
     });
-
 document.querySelector('.order-summary').innerHTML = theAccumulator;
 
 
-console.log(5);
+// Here we loop through all the delete link to find each button when click.
+document.querySelectorAll('.delete-quantity-link').forEach((deleted)=>{
+
+  // A click event has been added to make it interactive
+  deleted.addEventListener('click',()=>{
+    let deleteBtnId = deleted.id;
+    
+    // A function that has been created from the the Cart file has been called here with a Augument that is the particular Delete Button Id that has been clicked.
+    removingFromCart(deleteBtnId);
+
+
+    // using the DOM to collect the full from details and delete it from the Page.
+    let aboutToDelete = document.querySelector(`.idName-${deleteBtnId}`);
+
+    // The Removal function is called here.
+    aboutToDelete.remove();
+    
+   
+    
+
+
+   let findingToDelete = '';
+    cart.forEach((allCartProducts)=>{
+      if (deleteBtnId === allCartProducts.ID) {
+        findingToDelete = allCartProducts;
+      }
+      
+    })
+    
+  });
+
+  
+})
+
+
+// Demo for the Updating Link button

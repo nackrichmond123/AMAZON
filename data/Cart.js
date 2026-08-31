@@ -1,4 +1,4 @@
-export const cart = [
+export let cart = [
   {
     Name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
     quantity: 1,
@@ -55,4 +55,20 @@ export function addToCart(productName,idName) {
         });
         
       }
+}
+
+// Delecting a product from the Cart
+export function removingFromCart(selectedId) {
+  const newCart = [];
+  
+  cart.forEach((cartItem)=>{
+    if (cartItem.ID !== selectedId) {
+      newCart.push(cartItem);
+    }
+    
+  });
+
+  cart = newCart;
+  // console.log(cart);
+  
 }
