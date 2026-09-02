@@ -1,4 +1,7 @@
-export let cart = [
+export let cart = JSON.parse(localStorage.getItem('savedToPage'));
+
+if (!cart) {
+  cart =  [
   {
     Name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
     quantity: 1,
@@ -9,25 +12,16 @@ export let cart = [
     Name: "Intermediate Size Basketball",
     quantity:1,
     ID: "15b6fc6f-327a-4ec4-896f-486349e85a3d"
-  },
-
-  {
-    Name: "Adults Plain Cotton T-Shirt - 2 Pack",
-    quantity: 1,
-    ID: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e"
-  },
-
-  {
-    ID: "3fdfe8d6-9a15-4979-b459-585b0d0545b9",
-    quantity: 1
-  },
-
-  {
-    ID: "8c9c52b5-5a19-4bcb-a5d1-158a74287c53",
-    quantity: 1
   }
 ];
+}
 
+
+// A Function to save all the saved products into Local Storage.
+// It stores into storage when the Add to Cart and Delete Buttons are  clicked.
+export function savingToStorage() {
+  localStorage.setItem('savedToPage',JSON.stringify(cart));
+} 
 
 // A function to add to Cart. 
 export function addToCart(productName,idName) {
@@ -55,20 +49,52 @@ export function addToCart(productName,idName) {
         });
         
       }
+
+      savingToStorage();
 }
 
-// Delecting a product from the Cart
+
+
+// Delecting a product from the Cart.
+export let Length = '';
+
 export function removingFromCart(selectedId) {
   const newCart = [];
   
   cart.forEach((cartItem)=>{
+    
+    
     if (cartItem.ID !== selectedId) {
       newCart.push(cartItem);
+      updateQuantity();
+    //  console.log(cartItem);
     }
     
   });
 
   cart = newCart;
-  // console.log(cart);
-  
+
+  updateQuantity();
+
+
+  savingToStorage();
+}
+
+// Updating the cart quantity after Deleting a product.
+export function updateQuantity() {
+        // This countDown  variable will count the number of products added to the Cart and save it to Local Storage..  
+        let quantityCount = 0;
+
+        cart.forEach((item) =>{
+          // The countDown increment.
+          quantityCount += item.quantity;
+
+          localStorage.setItem('numberOfQuantity',quantityCount);
+          
+        })
+
+        
+
+      // Demostration of number of product quantity on the page.
+      document.querySelector('.return-to-home-link').innerHTML = quantityCount + ' ' + 'items';
 }

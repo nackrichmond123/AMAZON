@@ -1,14 +1,15 @@
-import { cart,removingFromCart } from "../data/Cart.js";
+import { cart,removingFromCart,updateQuantity } from "../data/Cart.js";
 import { products } from "../data/products.js";
 
- // Here,we're using the product Id to get the other details of a product that is added into a cart.Eg is image,price and name.
+updateQuantity();
+
+
+ // Here,we're using the product Id to get the other details of a product that is added into a cart. Eg is image,price and name.
 let matchingCartProduct = '';
 
 let theAccumulator;
 
-    cart.forEach((cartItem,index) =>{
-
-      // console.log(cartItem);
+    cart.forEach((cartItem) =>{
       
       const cartId = cartItem.ID;
 
@@ -104,10 +105,6 @@ let theAccumulator;
       // The Accumulater variable.
       theAccumulator += HTML;
       
-      // This part also shows the number of products added to the cart and display it on top of the CheckOut page.
-      // We use the ".length" property to count it..
-      document.querySelector('.return-to-home-link').innerHTML = cart.length +' ' + 'items';
-
     });
 document.querySelector('.order-summary').innerHTML = theAccumulator;
 
@@ -145,6 +142,3 @@ document.querySelectorAll('.delete-quantity-link').forEach((deleted)=>{
 
   
 })
-
-
-// Demo for the Updating Link button

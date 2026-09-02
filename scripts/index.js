@@ -1,6 +1,16 @@
 import { cart, addToCart} from "../data/Cart.js";
 import { products } from "../data/products.js";
 
+// The Number of products in the cart will be load on the page as it was left previously.And it's displayed on the page here.Using  simple Function.
+
+export function displayQuantity() {
+  document.querySelector('.cart-quantity').innerHTML = localStorage.getItem('numberOfQuantity');
+}
+
+displayQuantity();
+
+
+
 let accumulativePattern = '';
 
 // Here we're using all the products created as an Objects inside an Array,the Array name is products.Using the ForEach loop,we loop through and generate all the HTML elements needed and display it on the web page.
@@ -66,30 +76,33 @@ products.forEach((product) => {
 // Target the products container and put all the product details in and display it on the Page.
 document.querySelector('.products-grid').innerHTML = accumulativePattern;
 
+
+
 // A function to update the cart quantity depending on the products added.
-function updateQuantity() {
-        // This countDown  variable will count the number of products added to the Cart..  
+export function updateQuantity() {
+        // This countDown  variable will count the number of products added to the Cart and save it to Local Storage..  
         let quantityCount = 0;
 
         cart.forEach((item) =>{
           // The countDown increment.
           quantityCount += item.quantity;
-          
+
+          localStorage.setItem('numberOfQuantity',quantityCount);
         })
 
-        // console.log(quantityCount);
+        
 
-      // Demostration of number of cart on the page.
-      let productCount = document.querySelector('.cart-quantity');
-      productCount.innerHTML = quantityCount;
+      // Demostration of number of product quantity on the page.
+      document.querySelector('.cart-quantity').innerHTML = quantityCount;
 }
+
+
 
 
 // Identify the Add to Cart button by giving it a class name and loop through to take effect on all the buttons.
 // We are solving all the Add to Cart functionalities here...
 document.querySelectorAll('.js-button').forEach((addButton) => {
 
-  // console.log(addButton);
   
   // Here,we're giving the Add to cart button an Even Listener.
     addButton.addEventListener('click',() => {
@@ -98,16 +111,7 @@ document.querySelectorAll('.js-button').forEach((addButton) => {
       
       addToCart(productName,idName);
       updateQuantity();
-
-      document.querySelectorAll('.popup').forEach((popUp) => {
-        popUp.addEventListener('click',(pop) =>{
-          console.log(pop);
-        })
-        
-        
-      });
-
-      console.log(cart);
+      // console.log(cart);
 
     }); 
 });
