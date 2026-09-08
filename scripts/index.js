@@ -2,13 +2,15 @@ import { cart, addToCart} from "../data/Cart.js";
 import { products } from "../data/products.js";
 
 // The Number of products in the cart will be load on the page as it was left previously.And it's displayed on the page here.Using  simple Function.
-
 export function displayQuantity() {
-  document.querySelector('.cart-quantity').innerHTML = localStorage.getItem('numberOfQuantity');
+  let Quantity = localStorage.getItem('numberOfQuantity');
+  document.querySelector('.cart-quantity').innerHTML = Quantity;
+  if (Quantity === 0) {
+    Quantity.innerHTML = 0;
+  }
 }
 
 displayQuantity();
-
 
 
 let accumulativePattern = '';
@@ -97,8 +99,6 @@ export function updateQuantity() {
 }
 
 
-
-
 // Identify the Add to Cart button by giving it a class name and loop through to take effect on all the buttons.
 // We are solving all the Add to Cart functionalities here...
 document.querySelectorAll('.js-button').forEach((addButton) => {
@@ -108,10 +108,9 @@ document.querySelectorAll('.js-button').forEach((addButton) => {
     addButton.addEventListener('click',() => {
       let productName = addButton.dataset.productName;
       let idName = addButton.id;
-      
-      addToCart(productName,idName);
+
+      addToCart(idName);
       updateQuantity();
-      // console.log(cart);
 
     }); 
 });

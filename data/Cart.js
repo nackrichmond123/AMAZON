@@ -1,19 +1,24 @@
+// import { deliveryOptions } from "./deliveryOption.js";
+
+
 export let cart = JSON.parse(localStorage.getItem('savedToPage'));
+// console.log(cart);
 
 if (!cart) {
   cart =  [
   {
-    Name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
+    ID: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     quantity: 1,
-    ID: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6"
+    deliveryOptionsId: 1
   },
 
   {
-    Name: "Intermediate Size Basketball",
-    quantity:1,
-    ID: "15b6fc6f-327a-4ec4-896f-486349e85a3d"
+    ID: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+    quantity:2,
+    deliveryOptionsId: 1
   }
-];
+
+  ];
 }
 
 
@@ -24,12 +29,11 @@ export function savingToStorage() {
 } 
 
 // A function to add to Cart. 
-export function addToCart(productName,idName) {
+export function addToCart(idName) {
       // A  condition to check whether a product has already been added to cart or not,Using the products's ID.
       let sameProduct = '';
       
       cart.forEach((item) =>{
-        // console.log(item);
         
         if (idName === item.ID) {
           sameProduct = item;
@@ -43,9 +47,9 @@ export function addToCart(productName,idName) {
 
       } else {
           cart.push({
-          Name:productName,
+          ID:idName,
           quantity: 1,
-          ID:idName
+          deliveryOptionsId: 1
         });
         
       }
@@ -98,3 +102,5 @@ export function updateQuantity() {
       // Demostration of number of product quantity on the page.
       document.querySelector('.return-to-home-link').innerHTML = quantityCount + ' ' + 'items';
 }
+
+// console.log(cart);
