@@ -2,7 +2,7 @@
 
 
 export let cart = JSON.parse(localStorage.getItem('savedToPage'));
-console.log(cart);
+// console.log(cart);
 
 if (!cart) {
   cart =  [
