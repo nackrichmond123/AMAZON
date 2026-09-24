@@ -3,6 +3,7 @@ import { products,getProductById } from "../../data/products.js";
 import  dayjs  from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { deliveryOptions,getDeliveryOption } from "../../data/deliveryOption.js";
 import { toPriceFormat } from "../../Utilities/priceSolving.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 export function renderOrderSummary() {
   updateQuantity();
@@ -153,6 +154,7 @@ export function renderOrderSummary() {
 
       // The Removal function is called here.
       aboutToDelete.remove();
+      renderPaymentSummary();
       
     });
   })
@@ -166,6 +168,7 @@ export function renderOrderSummary() {
       const {productId,deliveryOptionId} = value.dataset;  
       updateDeliveryOption(productId,deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary();
     });
   })
   
