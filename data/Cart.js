@@ -97,10 +97,11 @@ export function updateQuantity() {
           
         })
 
-        
+       
 
       // Demostration of number of product quantity on the page.
       document.querySelector('.return-to-home-link').innerHTML = quantityCount + ' ' + 'items';
+       return quantityCount;
 }
 
 export function updateDeliveryOption(idName,deliveryOptionId) {

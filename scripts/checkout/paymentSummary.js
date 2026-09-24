@@ -2,6 +2,9 @@ import { cart } from "../../data/Cart.js";
 import { getProductById } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOption.js";
 import { toPriceFormat } from "../../Utilities/priceSolving.js";
+import { updateQuantity } from "../../data/Cart.js";
+
+// console.log(updateQuantity());
 
 // Here we are writing a function to get all the data on the Payment sumamary and use it to Generate the HMTL on the Page.
 export function renderPaymentSummary(){
@@ -11,7 +14,7 @@ export function renderPaymentSummary(){
   let totalShippingPrice = 0;
   cart.forEach((cartProducts) => {
 
-    console.log(cartProducts);
+    // console.log(cartProducts);
     
     // A function was created to get all the details of a product by passing in the product ID as an augument.So with that,we get all the product prices.
     const productsInCart =  getProductById(cartProducts.ID);
@@ -26,7 +29,7 @@ export function renderPaymentSummary(){
     // Same as the product prices,We will use the same function with a deliveryOption ID,we will get the shipping price by looping through the deliveryOptions to find the Fees.
     const deliveryOption = getDeliveryOption(cartProducts.deliveryOptionsId);
 
-    console.log(deliveryOption);
+    // console.log(deliveryOption);
     
     // 2. The Total cost of Shipping fees
     totalShippingPrice += deliveryOption.shippingFees;
@@ -47,11 +50,11 @@ export function renderPaymentSummary(){
   const totalAmountToPay = totalBeforeTax + taxPecentage; 
 
   
-  console.log(totalProductPrice);
-  console.log(totalShippingPrice);
-  console.log(totalBeforeTax);
-  console.log(taxPecentage);
-  console.log(totalAmountToPay);
+  // console.log(totalProductPrice);
+  // console.log(totalShippingPrice);
+  // console.log(totalBeforeTax);
+  // console.log(taxPecentage);
+  // console.log(totalAmountToPay);
   
 
   
@@ -61,7 +64,7 @@ export function renderPaymentSummary(){
     </div>
 
     <div class="payment-summary-row">
-      <div>Items (3):</div>
+      <div>Items (${updateQuantity()}):</div>
       <div class="payment-summary-money">$${toPriceFormat(totalProductPrice)}</div>
     </div>
 

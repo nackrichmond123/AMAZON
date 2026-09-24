@@ -150,10 +150,13 @@ export function renderOrderSummary() {
 
 
       // Using the DOM to collect the full details of a product and delete it from the Page.
-      let aboutToDelete = document.querySelector(`.idName-${deleteBtnId}`);
+      // let aboutToDelete = document.querySelector(`.idName-${deleteBtnId}`);
 
       // The Removal function is called here.
-      aboutToDelete.remove();
+      // aboutToDelete.remove();
+
+      // At first we were using the DOM to update the page,but now we are using the MVC(Model View Controller) for all our updates on the page.
+      renderOrderSummary();
       renderPaymentSummary();
       
     });
