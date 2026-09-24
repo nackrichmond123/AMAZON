@@ -1,5 +1,6 @@
 import { cart, addToCart} from "../data/Cart.js";
 import { products } from "../data/products.js";
+import { toPriceFormat } from "../Utilities/priceSolving.js";
 
 // The Number of products in the cart will be load on the page as it was left previously.And it's displayed on the page here.Using  simple Function.
 export function displayQuantity() {
@@ -37,7 +38,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-            ${(product.priceCents / 100).toFixed(2)}
+            ${toPriceFormat(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">

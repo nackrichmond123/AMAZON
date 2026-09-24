@@ -1,7 +1,8 @@
 import { cart,removingFromCart,updateQuantity,updateDeliveryOption } from "../../data/Cart.js";
-import { products } from "../../data/products.js";
+import { products,getProductById } from "../../data/products.js";
 import  dayjs  from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
-import { deliveryOptions } from "../../data/deliveryOption.js";
+import { deliveryOptions,getDeliveryOption } from "../../data/deliveryOption.js";
+import { toPriceFormat } from "../../Utilities/priceSolving.js";
 
 export function renderOrderSummary() {
   updateQuantity();
@@ -15,32 +16,17 @@ export function renderOrderSummary() {
     
     const cartId = cartItem.ID;
 
-    let matchingCartProduct = '';
+    const matchingCartProduct = getProductById(cartId);
 
-    products.forEach((allProducts) =>{
-      
-        if (allProducts.id === cartId) {
-            matchingCartProduct = allProducts;
-            // console.log(matchingCartProduct);
-            
-        }
-    });
+
 
     // Finding from the Cart,the delivery Option Id and compare it to the Options in the DeliveryOption Array.
     const deliveryOptionId = cartItem.deliveryOptionsId;
     // console.log(deliveryOptionId);
     
     
-    let deliveryOption = '';  
+    let deliveryOption = getDeliveryOption(deliveryOptionId);  
 
-    deliveryOptions.forEach((option) =>{ 
-      // console.log(option.deliveryDays);
-      
-        if (option.id === deliveryOptionId) {
-            deliveryOption = option;
-          
-        }
-    });
 
   
     const dateOfToday = dayjs();
@@ -64,7 +50,7 @@ export function renderOrderSummary() {
               ${matchingCartProduct.name}
             </div>
             <div class="product-price">
-              ${(matchingCartProduct.priceCents /100).toFixed(2)}
+              ${toPriceFormat(matchingCartProduct.priceCents)}
             </div>
             <div class="product-quantity">
               <span>
@@ -108,7 +94,7 @@ export function renderOrderSummary() {
         const properPrice = AllOptions.shippingFees === 0
         ? 'FREE'
 
-        : `$${(AllOptions.shippingFees / 100).toFixed(2)} -`;
+        : `$${toPriceFormat(AllOptions.shippingFees)} -`;
 
         // Solving the problem of the radio button when it is clicked.
         // The radio button will be checked if it matches the product in the cart deliveryOptionId Array.
@@ -182,5 +168,6 @@ export function renderOrderSummary() {
       renderOrderSummary();
     });
   })
+  
 }
 

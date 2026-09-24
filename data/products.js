@@ -1,3 +1,18 @@
+export function getProductById(productId) {
+    let matchingCartProduct = '';
+
+  products.forEach((allProducts) =>{
+    
+      if (allProducts.id === productId) {
+          matchingCartProduct = allProducts;
+          // console.log(matchingCartProduct);
+          
+      }
+  });
+
+  return matchingCartProduct;
+}
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
